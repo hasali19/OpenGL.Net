@@ -226,6 +226,11 @@
     </command>
     
     <!-- Unsafe/Generic parameters -->
+
+    <!--  glClear*Buffer* -->
+    <command name="^glClear(Named)?(Buffer|Framebuffer)(i|ui|f)v$">
+        <flags>UnsafeParams GenericParams</flags>
+    </command>
     
     <!--  glLoad*Matrix* -->
     <command name="^gl(Load|Mult)(Transpose)?(Matrix)(d|f|x)(ARB|OES)?$">

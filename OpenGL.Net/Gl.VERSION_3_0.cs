@@ -5586,6 +5586,76 @@ namespace OpenGL
 
 		/// <summary>
 		/// <para>
+		/// [GL4] glClearBufferiv: clear individual buffers of a framebuffer
+		/// </para>
+		/// <para>
+		/// [GLES3.2] glClearBufferiv: clear individual buffers of the currently bound draw framebuffer
+		/// </para>
+		/// </summary>
+		/// <param name="buffer">
+		/// Specify the buffer to clear.
+		/// </param>
+		/// <param name="drawbuffer">
+		/// Specify a particular draw buffer to clear.
+		/// </param>
+		/// <param name="value">
+		/// A pointer to the value or values to clear the buffer to.
+		/// </param>
+		[RequiredByFeature("GL_VERSION_3_0")]
+		[RequiredByFeature("GL_ES_VERSION_3_0", Api = "gles2")]
+		public static unsafe void ClearBuffer(Buffer buffer, int drawbuffer, int* value)
+		{
+			Debug.Assert(Delegates.pglClearBufferiv != null, "pglClearBufferiv not implemented");
+			Delegates.pglClearBufferiv((int)buffer, drawbuffer, value);
+			LogCommand("glClearBufferiv", null, buffer, drawbuffer, new IntPtr(value).ToString("X8")			);
+			DebugCheckErrors(null);
+		}
+
+		/// <summary>
+		/// <para>
+		/// [GL4] glClearBufferiv: clear individual buffers of a framebuffer
+		/// </para>
+		/// <para>
+		/// [GLES3.2] glClearBufferiv: clear individual buffers of the currently bound draw framebuffer
+		/// </para>
+		/// </summary>
+		/// <param name="buffer">
+		/// Specify the buffer to clear.
+		/// </param>
+		/// <param name="drawbuffer">
+		/// Specify a particular draw buffer to clear.
+		/// </param>
+		/// <param name="value">
+		/// A pointer to the value or values to clear the buffer to.
+		/// </param>
+		[RequiredByFeature("GL_VERSION_3_0")]
+		[RequiredByFeature("GL_ES_VERSION_3_0", Api = "gles2")]
+		public static void ClearBufferi<T>(Buffer buffer, int drawbuffer, T value) where T : struct
+		{
+			Debug.Assert(Delegates.pglClearBufferiv != null, "pglClearBufferiv not implemented");
+			#if NETCOREAPP1_1
+			GCHandle valueHandle = GCHandle.Alloc(value);
+			try {
+				unsafe {
+					Delegates.pglClearBufferiv((int)buffer, drawbuffer, (int*)valueHandle.AddrOfPinnedObject().ToPointer());
+				}
+			} finally {
+				valueHandle.Free();
+			}
+			#else
+			unsafe {
+				TypedReference refValue = __makeref(value);
+				IntPtr refValuePtr = *(IntPtr*)(&refValue);
+
+				Delegates.pglClearBufferiv((int)buffer, drawbuffer, (int*)refValuePtr.ToPointer());
+			}
+			#endif
+			LogCommand("glClearBufferiv", null, buffer, drawbuffer, value			);
+			DebugCheckErrors(null);
+		}
+
+		/// <summary>
+		/// <para>
 		/// [GL4] glClearBufferuiv: clear individual buffers of a framebuffer
 		/// </para>
 		/// <para>
@@ -5618,6 +5688,76 @@ namespace OpenGL
 
 		/// <summary>
 		/// <para>
+		/// [GL4] glClearBufferuiv: clear individual buffers of a framebuffer
+		/// </para>
+		/// <para>
+		/// [GLES3.2] glClearBufferuiv: clear individual buffers of the currently bound draw framebuffer
+		/// </para>
+		/// </summary>
+		/// <param name="buffer">
+		/// Specify the buffer to clear.
+		/// </param>
+		/// <param name="drawbuffer">
+		/// Specify a particular draw buffer to clear.
+		/// </param>
+		/// <param name="value">
+		/// A pointer to the value or values to clear the buffer to.
+		/// </param>
+		[RequiredByFeature("GL_VERSION_3_0")]
+		[RequiredByFeature("GL_ES_VERSION_3_0", Api = "gles2")]
+		public static unsafe void ClearBuffer(Buffer buffer, int drawbuffer, uint* value)
+		{
+			Debug.Assert(Delegates.pglClearBufferuiv != null, "pglClearBufferuiv not implemented");
+			Delegates.pglClearBufferuiv((int)buffer, drawbuffer, value);
+			LogCommand("glClearBufferuiv", null, buffer, drawbuffer, new IntPtr(value).ToString("X8")			);
+			DebugCheckErrors(null);
+		}
+
+		/// <summary>
+		/// <para>
+		/// [GL4] glClearBufferuiv: clear individual buffers of a framebuffer
+		/// </para>
+		/// <para>
+		/// [GLES3.2] glClearBufferuiv: clear individual buffers of the currently bound draw framebuffer
+		/// </para>
+		/// </summary>
+		/// <param name="buffer">
+		/// Specify the buffer to clear.
+		/// </param>
+		/// <param name="drawbuffer">
+		/// Specify a particular draw buffer to clear.
+		/// </param>
+		/// <param name="value">
+		/// A pointer to the value or values to clear the buffer to.
+		/// </param>
+		[RequiredByFeature("GL_VERSION_3_0")]
+		[RequiredByFeature("GL_ES_VERSION_3_0", Api = "gles2")]
+		public static void ClearBufferui<T>(Buffer buffer, int drawbuffer, T value) where T : struct
+		{
+			Debug.Assert(Delegates.pglClearBufferuiv != null, "pglClearBufferuiv not implemented");
+			#if NETCOREAPP1_1
+			GCHandle valueHandle = GCHandle.Alloc(value);
+			try {
+				unsafe {
+					Delegates.pglClearBufferuiv((int)buffer, drawbuffer, (uint*)valueHandle.AddrOfPinnedObject().ToPointer());
+				}
+			} finally {
+				valueHandle.Free();
+			}
+			#else
+			unsafe {
+				TypedReference refValue = __makeref(value);
+				IntPtr refValuePtr = *(IntPtr*)(&refValue);
+
+				Delegates.pglClearBufferuiv((int)buffer, drawbuffer, (uint*)refValuePtr.ToPointer());
+			}
+			#endif
+			LogCommand("glClearBufferuiv", null, buffer, drawbuffer, value			);
+			DebugCheckErrors(null);
+		}
+
+		/// <summary>
+		/// <para>
 		/// [GL4] glClearBufferfv: clear individual buffers of a framebuffer
 		/// </para>
 		/// <para>
@@ -5645,6 +5785,76 @@ namespace OpenGL
 					LogCommand("glClearBufferfv", null, buffer, drawbuffer, value					);
 				}
 			}
+			DebugCheckErrors(null);
+		}
+
+		/// <summary>
+		/// <para>
+		/// [GL4] glClearBufferfv: clear individual buffers of a framebuffer
+		/// </para>
+		/// <para>
+		/// [GLES3.2] glClearBufferfv: clear individual buffers of the currently bound draw framebuffer
+		/// </para>
+		/// </summary>
+		/// <param name="buffer">
+		/// Specify the buffer to clear.
+		/// </param>
+		/// <param name="drawbuffer">
+		/// Specify a particular draw buffer to clear.
+		/// </param>
+		/// <param name="value">
+		/// A pointer to the value or values to clear the buffer to.
+		/// </param>
+		[RequiredByFeature("GL_VERSION_3_0")]
+		[RequiredByFeature("GL_ES_VERSION_3_0", Api = "gles2")]
+		public static unsafe void ClearBuffer(Buffer buffer, int drawbuffer, float* value)
+		{
+			Debug.Assert(Delegates.pglClearBufferfv != null, "pglClearBufferfv not implemented");
+			Delegates.pglClearBufferfv((int)buffer, drawbuffer, value);
+			LogCommand("glClearBufferfv", null, buffer, drawbuffer, new IntPtr(value).ToString("X8")			);
+			DebugCheckErrors(null);
+		}
+
+		/// <summary>
+		/// <para>
+		/// [GL4] glClearBufferfv: clear individual buffers of a framebuffer
+		/// </para>
+		/// <para>
+		/// [GLES3.2] glClearBufferfv: clear individual buffers of the currently bound draw framebuffer
+		/// </para>
+		/// </summary>
+		/// <param name="buffer">
+		/// Specify the buffer to clear.
+		/// </param>
+		/// <param name="drawbuffer">
+		/// Specify a particular draw buffer to clear.
+		/// </param>
+		/// <param name="value">
+		/// A pointer to the value or values to clear the buffer to.
+		/// </param>
+		[RequiredByFeature("GL_VERSION_3_0")]
+		[RequiredByFeature("GL_ES_VERSION_3_0", Api = "gles2")]
+		public static void ClearBufferf<T>(Buffer buffer, int drawbuffer, T value) where T : struct
+		{
+			Debug.Assert(Delegates.pglClearBufferfv != null, "pglClearBufferfv not implemented");
+			#if NETCOREAPP1_1
+			GCHandle valueHandle = GCHandle.Alloc(value);
+			try {
+				unsafe {
+					Delegates.pglClearBufferfv((int)buffer, drawbuffer, (float*)valueHandle.AddrOfPinnedObject().ToPointer());
+				}
+			} finally {
+				valueHandle.Free();
+			}
+			#else
+			unsafe {
+				TypedReference refValue = __makeref(value);
+				IntPtr refValuePtr = *(IntPtr*)(&refValue);
+
+				Delegates.pglClearBufferfv((int)buffer, drawbuffer, (float*)refValuePtr.ToPointer());
+			}
+			#endif
+			LogCommand("glClearBufferfv", null, buffer, drawbuffer, value			);
 			DebugCheckErrors(null);
 		}
 

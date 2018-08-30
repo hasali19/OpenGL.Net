@@ -1425,6 +1425,72 @@ namespace OpenGL
 		}
 
 		/// <summary>
+		/// [GL4] glClearNamedFramebufferiv: clear individual buffers of a framebuffer
+		/// </summary>
+		/// <param name="framebuffer">
+		/// Specifies the name of the framebuffer object for Gl.ClearNamedFramebuffer*.
+		/// </param>
+		/// <param name="buffer">
+		/// Specify the buffer to clear.
+		/// </param>
+		/// <param name="drawbuffer">
+		/// Specify a particular draw buffer to clear.
+		/// </param>
+		/// <param name="value">
+		/// A pointer to the value or values to clear the buffer to.
+		/// </param>
+		[RequiredByFeature("GL_VERSION_4_5")]
+		[RequiredByFeature("GL_ARB_direct_state_access", Api = "gl|glcore")]
+		public static unsafe void ClearNamedFramebuffer(uint framebuffer, Buffer buffer, int drawbuffer, int* value)
+		{
+			Debug.Assert(Delegates.pglClearNamedFramebufferiv != null, "pglClearNamedFramebufferiv not implemented");
+			Delegates.pglClearNamedFramebufferiv(framebuffer, (int)buffer, drawbuffer, value);
+			LogCommand("glClearNamedFramebufferiv", null, framebuffer, buffer, drawbuffer, new IntPtr(value).ToString("X8")			);
+			DebugCheckErrors(null);
+		}
+
+		/// <summary>
+		/// [GL4] glClearNamedFramebufferiv: clear individual buffers of a framebuffer
+		/// </summary>
+		/// <param name="framebuffer">
+		/// Specifies the name of the framebuffer object for Gl.ClearNamedFramebuffer*.
+		/// </param>
+		/// <param name="buffer">
+		/// Specify the buffer to clear.
+		/// </param>
+		/// <param name="drawbuffer">
+		/// Specify a particular draw buffer to clear.
+		/// </param>
+		/// <param name="value">
+		/// A pointer to the value or values to clear the buffer to.
+		/// </param>
+		[RequiredByFeature("GL_VERSION_4_5")]
+		[RequiredByFeature("GL_ARB_direct_state_access", Api = "gl|glcore")]
+		public static void ClearNamedFramebufferi<T>(uint framebuffer, Buffer buffer, int drawbuffer, T value) where T : struct
+		{
+			Debug.Assert(Delegates.pglClearNamedFramebufferiv != null, "pglClearNamedFramebufferiv not implemented");
+			#if NETCOREAPP1_1
+			GCHandle valueHandle = GCHandle.Alloc(value);
+			try {
+				unsafe {
+					Delegates.pglClearNamedFramebufferiv(framebuffer, (int)buffer, drawbuffer, (int*)valueHandle.AddrOfPinnedObject().ToPointer());
+				}
+			} finally {
+				valueHandle.Free();
+			}
+			#else
+			unsafe {
+				TypedReference refValue = __makeref(value);
+				IntPtr refValuePtr = *(IntPtr*)(&refValue);
+
+				Delegates.pglClearNamedFramebufferiv(framebuffer, (int)buffer, drawbuffer, (int*)refValuePtr.ToPointer());
+			}
+			#endif
+			LogCommand("glClearNamedFramebufferiv", null, framebuffer, buffer, drawbuffer, value			);
+			DebugCheckErrors(null);
+		}
+
+		/// <summary>
 		/// [GL4] glClearNamedFramebufferuiv: clear individual buffers of a framebuffer
 		/// </summary>
 		/// <param name="framebuffer">
@@ -1455,6 +1521,72 @@ namespace OpenGL
 		}
 
 		/// <summary>
+		/// [GL4] glClearNamedFramebufferuiv: clear individual buffers of a framebuffer
+		/// </summary>
+		/// <param name="framebuffer">
+		/// Specifies the name of the framebuffer object for Gl.ClearNamedFramebuffer*.
+		/// </param>
+		/// <param name="buffer">
+		/// Specify the buffer to clear.
+		/// </param>
+		/// <param name="drawbuffer">
+		/// Specify a particular draw buffer to clear.
+		/// </param>
+		/// <param name="value">
+		/// A pointer to the value or values to clear the buffer to.
+		/// </param>
+		[RequiredByFeature("GL_VERSION_4_5")]
+		[RequiredByFeature("GL_ARB_direct_state_access", Api = "gl|glcore")]
+		public static unsafe void ClearNamedFramebuffer(uint framebuffer, Buffer buffer, int drawbuffer, uint* value)
+		{
+			Debug.Assert(Delegates.pglClearNamedFramebufferuiv != null, "pglClearNamedFramebufferuiv not implemented");
+			Delegates.pglClearNamedFramebufferuiv(framebuffer, (int)buffer, drawbuffer, value);
+			LogCommand("glClearNamedFramebufferuiv", null, framebuffer, buffer, drawbuffer, new IntPtr(value).ToString("X8")			);
+			DebugCheckErrors(null);
+		}
+
+		/// <summary>
+		/// [GL4] glClearNamedFramebufferuiv: clear individual buffers of a framebuffer
+		/// </summary>
+		/// <param name="framebuffer">
+		/// Specifies the name of the framebuffer object for Gl.ClearNamedFramebuffer*.
+		/// </param>
+		/// <param name="buffer">
+		/// Specify the buffer to clear.
+		/// </param>
+		/// <param name="drawbuffer">
+		/// Specify a particular draw buffer to clear.
+		/// </param>
+		/// <param name="value">
+		/// A pointer to the value or values to clear the buffer to.
+		/// </param>
+		[RequiredByFeature("GL_VERSION_4_5")]
+		[RequiredByFeature("GL_ARB_direct_state_access", Api = "gl|glcore")]
+		public static void ClearNamedFramebufferui<T>(uint framebuffer, Buffer buffer, int drawbuffer, T value) where T : struct
+		{
+			Debug.Assert(Delegates.pglClearNamedFramebufferuiv != null, "pglClearNamedFramebufferuiv not implemented");
+			#if NETCOREAPP1_1
+			GCHandle valueHandle = GCHandle.Alloc(value);
+			try {
+				unsafe {
+					Delegates.pglClearNamedFramebufferuiv(framebuffer, (int)buffer, drawbuffer, (uint*)valueHandle.AddrOfPinnedObject().ToPointer());
+				}
+			} finally {
+				valueHandle.Free();
+			}
+			#else
+			unsafe {
+				TypedReference refValue = __makeref(value);
+				IntPtr refValuePtr = *(IntPtr*)(&refValue);
+
+				Delegates.pglClearNamedFramebufferuiv(framebuffer, (int)buffer, drawbuffer, (uint*)refValuePtr.ToPointer());
+			}
+			#endif
+			LogCommand("glClearNamedFramebufferuiv", null, framebuffer, buffer, drawbuffer, value			);
+			DebugCheckErrors(null);
+		}
+
+		/// <summary>
 		/// [GL4] glClearNamedFramebufferfv: clear individual buffers of a framebuffer
 		/// </summary>
 		/// <param name="framebuffer">
@@ -1481,6 +1613,72 @@ namespace OpenGL
 					LogCommand("glClearNamedFramebufferfv", null, framebuffer, buffer, drawbuffer, value					);
 				}
 			}
+			DebugCheckErrors(null);
+		}
+
+		/// <summary>
+		/// [GL4] glClearNamedFramebufferfv: clear individual buffers of a framebuffer
+		/// </summary>
+		/// <param name="framebuffer">
+		/// Specifies the name of the framebuffer object for Gl.ClearNamedFramebuffer*.
+		/// </param>
+		/// <param name="buffer">
+		/// Specify the buffer to clear.
+		/// </param>
+		/// <param name="drawbuffer">
+		/// Specify a particular draw buffer to clear.
+		/// </param>
+		/// <param name="value">
+		/// A pointer to the value or values to clear the buffer to.
+		/// </param>
+		[RequiredByFeature("GL_VERSION_4_5")]
+		[RequiredByFeature("GL_ARB_direct_state_access", Api = "gl|glcore")]
+		public static unsafe void ClearNamedFramebuffer(uint framebuffer, Buffer buffer, int drawbuffer, float* value)
+		{
+			Debug.Assert(Delegates.pglClearNamedFramebufferfv != null, "pglClearNamedFramebufferfv not implemented");
+			Delegates.pglClearNamedFramebufferfv(framebuffer, (int)buffer, drawbuffer, value);
+			LogCommand("glClearNamedFramebufferfv", null, framebuffer, buffer, drawbuffer, new IntPtr(value).ToString("X8")			);
+			DebugCheckErrors(null);
+		}
+
+		/// <summary>
+		/// [GL4] glClearNamedFramebufferfv: clear individual buffers of a framebuffer
+		/// </summary>
+		/// <param name="framebuffer">
+		/// Specifies the name of the framebuffer object for Gl.ClearNamedFramebuffer*.
+		/// </param>
+		/// <param name="buffer">
+		/// Specify the buffer to clear.
+		/// </param>
+		/// <param name="drawbuffer">
+		/// Specify a particular draw buffer to clear.
+		/// </param>
+		/// <param name="value">
+		/// A pointer to the value or values to clear the buffer to.
+		/// </param>
+		[RequiredByFeature("GL_VERSION_4_5")]
+		[RequiredByFeature("GL_ARB_direct_state_access", Api = "gl|glcore")]
+		public static void ClearNamedFramebufferf<T>(uint framebuffer, Buffer buffer, int drawbuffer, T value) where T : struct
+		{
+			Debug.Assert(Delegates.pglClearNamedFramebufferfv != null, "pglClearNamedFramebufferfv not implemented");
+			#if NETCOREAPP1_1
+			GCHandle valueHandle = GCHandle.Alloc(value);
+			try {
+				unsafe {
+					Delegates.pglClearNamedFramebufferfv(framebuffer, (int)buffer, drawbuffer, (float*)valueHandle.AddrOfPinnedObject().ToPointer());
+				}
+			} finally {
+				valueHandle.Free();
+			}
+			#else
+			unsafe {
+				TypedReference refValue = __makeref(value);
+				IntPtr refValuePtr = *(IntPtr*)(&refValue);
+
+				Delegates.pglClearNamedFramebufferfv(framebuffer, (int)buffer, drawbuffer, (float*)refValuePtr.ToPointer());
+			}
+			#endif
+			LogCommand("glClearNamedFramebufferfv", null, framebuffer, buffer, drawbuffer, value			);
 			DebugCheckErrors(null);
 		}
 
